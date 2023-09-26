@@ -331,7 +331,7 @@ orderTotals = orders.map( order => {
 */
 
 // shorthand
-let orderTotals = orders.map( order => order.price * (1 + order.tax))
+let orderTotals = orders.map((order) => order.price * (1 + order.tax))
 
 
 
@@ -350,11 +350,13 @@ const exampleMenuItems = [
 // Create a function called sortMenuItems which takes in an array of objects like the one above
 // and sorts the array by price from smallest to largest. It should return the sorted array.
 
-// REPLACE THIS WITH YOUR CODE
-
-
-
-
+function sortMenuItems(array) {
+  return array.sort((item1, item2) => {
+    console.log("Item1:", item1);
+    console.log("Item2", item2);
+    return item1.price - item2.price;
+  });
+}
 
 
 
@@ -366,4 +368,6 @@ const exampleMenuItems = [
 //
 // Make sure to use arrow functions combined with the reduce method.
 
-// REPLACE THIS WITH YOUR CODE
+function productOfArray(array) {
+  return array.reduce((runningTotal, currentValue) => runningTotal * currentValue);
+}
