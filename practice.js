@@ -319,17 +319,19 @@ const orders = [
   Example: if tax is 0.07, the price afterTax could be calculated like this: afterTax = price * 1.07)
 */
 
+/*
 let orderTotals; // Code here
- 
-// need an array where each value of an original array has been altered the same way
-// that means an array.map()
+orderTotals = orders.map( order => {
+  console.log("Price", order.price );
+  console.log("Tax", order.tax );
+  let orderTotal = order.price * (1 + order.tax)
+  console.log("Order Total", orderTotal)
+  return orderTotal;
+});
+*/
 
-
-orders.reduce((orderTotals, order) => {
-   orderTotal + (order.price * (1 + order.tax));
-})
-
-
+// shorthand
+let orderTotals = orders.map( order => order.price * (1 + order.tax))
 
 
 
