@@ -21,17 +21,13 @@
 */
 
 ////////// PROBLEM 1 //////////
-
 /*
   Write a function called first that takes in two parameters, an array and a callback function.
   Then invoke the callback function, passing in the first element in the array as its argument.
   Return the result of invoking the callback.
 */
 
-function first(array, callbackFunction) {
-  return callbackFunction(array[0])
-} // WORKING
-
+const first = (array, callback) => callback(array[0]);
 
 // Do not edit the code below.
 const names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
@@ -46,15 +42,13 @@ first(names, function (firstName) {
 
 
 ////////// PROBLEM 2 //////////
-
 /*
   Write a function called last that takes in an array and a callback function.
   Then invoke the callback, passing in the last element in the array as the argument.
   Return the result of invoking the callback.
 */
-function last(array, callbackFunction) {
-  return callbackFunction(array[array.length - 1]);
-} // WORKING
+
+const last = (array, callback) => callback(array[array.length - 1]);
 
 
 // Do not edit the code below.
@@ -67,17 +61,12 @@ last(names, (lastName) => {
 
 
 
-
 ////////// PROBLEM 3 //////////
-
 /*
   Write a function called multiply that takes in three parameters: two numbers and a callback function.
   Invoke the callback, passing in the product of the two numbers multiplied as the argument.
 */
-function multiply(num1, num2, callbackFunction) {
-  return callbackFunction(num1 * num2);
-} // WORKING
-
+const multiply = (num1, num2, callback) => callback(num1 * num2);
 
 // Do not edit the code below.
 // Your function is called here
@@ -88,19 +77,14 @@ multiply(4, 3, function (answer) {
 
 
 
-
 ////////// PROBLEM 4 //////////
-
 /*
   Write a function called contains that takes in three parameters: an array, a name and a callback.
   Check if the name exists in the array.
   If it does, invoke the callback with true as the argument.
   If the name does not exist, invoke the callback with false as the argument.
 */
-function contains(inputArray, inputName, callbackFunction) {
-  callbackFunction(inputArray.includes(inputName));
-} // WORKING
-
+const contains = (inputArray, inputName, callback) => callback(inputArray.includes(inputName));
 
 // Do not edit the code below.
 // Your function is called here
@@ -115,19 +99,12 @@ contains(names, 'Colt', (result) => {
 
 
 
-
 ////////// PROBLEM 5 //////////
-
 /*
   Write a function called each that takes in an array of names and a callback function.
   For each name in the array, invoke the callback and pass in the name and the name's index as arguments.
 */
-
-function each(array, callbackFunction) {
-  for(let element of array) {
-    callbackFunction(element, array.indexOf(element))
-  }
-} // WORKING
+const each = (array, callback) => { array.forEach( x => callback(x, array.indexOf(x))) }
 
 // Do not edit the code below.
 // Your function is called here
@@ -138,23 +115,13 @@ each(names, (item, index) => {
 
 
 
-
 ////////// PROBLEM 6 //////////
-
 /*
   Write a function called getUserById that takes in three parameters: an array of objects (users), an id, and a callback,
   and searches for the user with a matching id.
   When the correct user object is found, invoke the callback with the user object as an argument.
 */
-
-function getUserById(array, id, callbackFunction) {
-  for (let object of array) {
-    if (object.id === id) {
-      callbackFunction(object)
-      break;
-    }
-  }
-} // WORKING
+const getUserById = (array, id, callback) => { array.forEach( object => { if (object.id === id) callback(object) })}
 
 // Do not edit the code below.
 const users = [
@@ -193,11 +160,10 @@ getUserById(users, '16t', (user) => {
 
 
 
-
-
 /*
   SECTION 2: HIGHER ORDER FUNCTIONS
 */
+
 
 /// /////// PROBLEM 7 //////////
 
@@ -207,13 +173,7 @@ getUserById(users, '16t', (user) => {
 //
 // Make sure to use an arrow function.
 // You should not use a for loop, but should use the filter method instead.
-
-function evens(array) {
-  // .filter returns a new array
-  // it iterates through the original array
-  // anytime the original array's value at an index meets a condition it adds it to the new array
-  return array.filter((num) => num % 2 === 0);
-} // WORKING
+const evens = array => array.filter(num => num % 2 === 0);
 
 
 /// /////// PROBLEM 8 //////////
@@ -225,12 +185,7 @@ function evens(array) {
 // and "a".
 //
 // Make sure to use an arrow function combined with the filter method (not a for loop).
-
-function startWithLetterA(array) {
-  return array.filter((value) => value.startsWith('a') || value.startsWith('A'));
-} // WORKING
-
-
+const startWithLetterA = array => array.filter(value => value.toUpperCase().startsWith('A'))
 
 
 /// /////// PROBLEM 9 //////////
@@ -240,11 +195,7 @@ function startWithLetterA(array) {
 // appended to the beginning of each name.
 //
 // Make sure to use arrow functions combined with the map method.
-
-function formalGreeting(array) {
-  return array.map((value) => "Hello, " + value);
-} // WORKING
-
+const formalGreeting = (array) => array.map(value => "Hello, " + value);
 
 
 /// /////// PROBLEM 10 //////////
@@ -254,19 +205,8 @@ function formalGreeting(array) {
 
 // Remember that by default, JavaScript sorts by converting all items to strings. So you
 // will need to provide a compare function.
-
-function sortNumbers(array) {
-  // array.sort() takes a compare function as a parameter
-  // this compare function determines the way the array is sorted
-  // compare functions take 2 values and return a value
-  // if that value is positive, put value2 before value 1
-  // if that value is negative, put value1 before value2
-  // if that value is 0, then keep the original order
-  // for an array of numbers, you can simply return a - b
-
-  return array.sort((value1, value2) => value1 - value2);
-} // WORKING
-
+const sortNumbers = array => array.sort(sortNumeric);
+const sortNumeric = (a, b) => { return a - b; }
 
 
 /// /////// PROBLEM 11 //////////
@@ -286,23 +226,7 @@ const employees = [
   { name: 'Alicia', job: 'designer' },
 ];
 // Do not edit the code above.
-
-function findProgrammer(employeeArray) {
-  return employeeArray.filter((employee) => employee.job === "programmer")[0];
-}
-
-/*
-function findProgrammer() {
-  return employees.filter(employee => employee.job === "programmer")[0]
-}
-
-function findProgrammer() {
-  return employeeArray.filter((employee) => {
-    if (employee.job === "programmer") return employee;
-  })
-}
-*/
-
+const findProgrammer = employeeArray => employeeArray.filter(employee => employee.job === "programmer")[0]
 
 
 ////////// PROBLEM 12 //////////
@@ -330,21 +254,7 @@ const orders = [
   Example: if tax is 0.07, the price afterTax could be calculated like this: afterTax = price * 1.07)
 */
 
-/*
-let orderTotals; // Code here
-orderTotals = orders.map( order => {
-  console.log("Price", order.price );
-  console.log("Tax", order.tax );
-  let orderTotal = order.price * (1 + order.tax)
-  console.log("Order Total", orderTotal)
-  return orderTotal;
-});
-*/
-
-// shorthand
 let orderTotals = orders.map((order) => order.price * (1 + order.tax))
-
-
 
 
 /// /////// PROBLEM 13 //////////
@@ -361,14 +271,7 @@ const exampleMenuItems = [
 // Create a function called sortMenuItems which takes in an array of objects like the one above
 // and sorts the array by price from smallest to largest. It should return the sorted array.
 
-function sortMenuItems(array) {
-  return array.sort((item1, item2) => {
-    console.log("Item1:", item1);
-    console.log("Item2", item2);
-    return item1.price - item2.price;
-  });
-}
-
+const sortMenuItems = (array) => array.sort((item1, item2) => item1.price - item2.price)
 
 
 /// /////// PROBLEM 14 //////////
@@ -379,6 +282,4 @@ function sortMenuItems(array) {
 //
 // Make sure to use arrow functions combined with the reduce method.
 
-function productOfArray(array) {
-  return array.reduce((runningTotal, currentValue) => runningTotal * currentValue);
-}
+const productOfArray = (array) => array.reduce((runningTotal, currentValue) => runningTotal * currentValue);
