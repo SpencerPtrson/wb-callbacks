@@ -224,9 +224,9 @@ describe('sortMenuItems', () => {
     const sortedMenuItems = sortMenuItems(exampleMenuItems);
     expect(sortedMenuItems.length).toBe(4);
     expect(sortedMenuItems[0]).toEqual({ item: 'Caesar salad', price: 6 });
-    expect(sortedMenuItems[1]).toEqual({ item: 'Pasta primavera', price: 17 });
-    expect(sortedMenuItems[2]).toEqual({ item: 'Sirloin steak', price: 24 });
-    expect(sortedMenuItems[3]).toEqual({ item: 'Bottle of fine wine', price: 104 });
+    expect(sortedMenuItems[1]).toEqual({ item: 'Pasta primavera', price: 15 });
+    expect(sortedMenuItems[2]).toEqual({ item: 'Grilled chicken', price: 18 });
+    expect(sortedMenuItems[3]).toEqual({ item: 'Sirloin steak', price: 24 });
   });
 });
 

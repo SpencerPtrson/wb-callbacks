@@ -287,10 +287,21 @@ const employees = [
 ];
 // Do not edit the code above.
 
-function findProgrammer() {
-  return employees.filter((employee) => employee.job === "programmer")[0];
+function findProgrammer(employeeArray) {
+  return employeeArray.filter((employee) => employee.job === "programmer")[0];
 }
 
+/*
+function findProgrammer() {
+  return employees.filter(employee => employee.job === "programmer")[0]
+}
+
+function findProgrammer() {
+  return employeeArray.filter((employee) => {
+    if (employee.job === "programmer") return employee;
+  })
+}
+*/
 
 
 
